@@ -1,5 +1,5 @@
 // src/components/layouts/Header.tsx
-import { Bell, Search, User, Settings } from 'lucide-react'
+import { Bell, Search, User, Settings, LogOut } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import {
@@ -10,8 +10,18 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
+import { useNavigate } from 'react-router-dom'
 
 export function Header() {
+
+  const navigate = useNavigate()
+  const handleLogout = () => {
+    // Clear any user data from localStorage or context
+    localStorage.removeItem('isAuthenticated')
+    sessionStorage.removeItem('isAuthenticated')
+    navigate('/login')
+  }
+
   return (
     <header className="sticky top-0 z-30 border-b border-gray-200 bg-white px-6 py-4">
       <div className="flex items-center justify-between">
@@ -55,7 +65,14 @@ export function Header() {
               <DropdownMenuItem>Bantuan</DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem className="text-red-600">
-                Keluar
+                <Button
+                variant="outline"
+                className="w-full justify-start space-x-2"
+                onClick={handleLogout}
+                >
+                <LogOut className="h-4 w-4" />
+                <span>Logout</span>
+                </Button>
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>

@@ -5,6 +5,7 @@ import { Input } from '@/components/ui/input'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { Search, Filter, Download, UserPlus, Eye, Edit } from 'lucide-react'
+import { EmployeeForm } from './EmployeeForm'
 
 const employees = [
   {
@@ -23,6 +24,12 @@ const employees = [
 
 export function EmployeeList() {
   const [search, setSearch] = useState('')
+  const [isFormOpen, setIsFormOpen] = useState(false)
+  const handleAddEmployee = (data: any) => {
+    // Handle the form submission
+    console.log('New employee data:', data)
+    // Here you would typically make an API call to save the data
+  }
 
   return (
     <div className="space-y-6">
@@ -31,11 +38,18 @@ export function EmployeeList() {
           <h1 className="text-3xl font-bold text-gray-900">Pendataan Pegawai</h1>
           <p className="text-gray-600">Kelola data guru, tendik, operator, dan pegawai dinas</p>
         </div>
-        <Button>
+        <Button onClick={() => setIsFormOpen(true)}>
           <UserPlus className="w-4 h-4 mr-2" />
           Tambah Pegawai
         </Button>
       </div>
+
+        {/* Employee Form Dialog */}
+        <EmployeeForm 
+            open={isFormOpen}
+            onOpenChange={setIsFormOpen}
+            onSubmit={handleAddEmployee}
+        />
 
       <Card>
         <CardHeader>
