@@ -5,8 +5,10 @@ npm install @hookform/resolvers zod
 npm install lucide-react
 
 # Setup shadcn components (sesuai dengan template)
-npx shadcn-ui@latest init
-# Pilih opsi: typescript, default style, base color: slate
+npx shadcn@latest init
+
+# Install semua komponen yang diperlukan
+npx shadcn@latest add button input card table tabs progress badge dropdown-menu avatar
 
 # Start the development server
 npm run dev
